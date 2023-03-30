@@ -14,7 +14,7 @@ exports.onExecutePostLogin = async (event, api) => {
 
 
 
-    if (transaction_input.othentFunction === 'broadcastTxn') {
+    if (transaction_input.othentFunction === 'sendTransaction') {
 
       const contract_input = {
         function: transaction_input.warpData.function, 
@@ -34,6 +34,23 @@ exports.onExecutePostLogin = async (event, api) => {
 
 
 
+    if (transaction_input.othentFunction === 'idToken') {
+
+      api.idToken.setCustomClaim(`email`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`email_verified`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`family_name`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`given_name`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`locale`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`name`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`nickname`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`picture`, 'redacted for privacy')
+      
+    } 
+
+
+
+
+
     if (transaction_input.othentFunction === 'initializeContract') {
 
       const contract_input = {
@@ -50,7 +67,29 @@ exports.onExecutePostLogin = async (event, api) => {
       api.idToken.setCustomClaim(`name`, 'redacted for privacy')
       api.idToken.setCustomClaim(`nickname`, 'redacted for privacy')
       api.idToken.setCustomClaim(`picture`, 'redacted for privacy')
-    } 
+    }
+
+
+
+
+
+    if (transaction_input.othentFunction === 'initializeJWK') {
+
+      const contract_input = {
+        function: transaction_input.warpData.function, 
+        data: transaction_input.warpData.data,
+        }
+      api.idToken.setCustomClaim(`contract_input`, contract_input)
+
+      api.idToken.setCustomClaim(`email`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`email_verified`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`family_name`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`given_name`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`locale`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`name`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`nickname`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`picture`, 'redacted for privacy')
+    }
 
 
 
