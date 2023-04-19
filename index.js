@@ -22,53 +22,69 @@ exports.onExecutePostLogin = async (event, api) => {
         }
       api.idToken.setCustomClaim(`contract_input`, contract_input)
 
-      api.idToken.setCustomClaim(`email`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`email_verified`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`family_name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`given_name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`locale`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`nickname`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`picture`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`tags`, transaction_input.tags)
+
+      api.idToken.setCustomClaim(`contract_id`, event.user.user_metadata.contract_id)
+
+      api.idToken.setCustomClaim(`email`, 0)
+      api.idToken.setCustomClaim(`email_verified`, 0)
+      api.idToken.setCustomClaim(`family_name`, 0)
+      api.idToken.setCustomClaim(`given_name`, 0)
+      api.idToken.setCustomClaim(`locale`, 0)
+      api.idToken.setCustomClaim(`name`, 'Othent User')
+      api.idToken.setCustomClaim(`nickname`, 0)
+      api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
     } 
 
 
 
     if (transaction_input.othentFunction === 'idToken') {
 
-      api.idToken.setCustomClaim(`email`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`email_verified`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`family_name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`given_name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`locale`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`nickname`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`picture`, 'redacted for privacy')
-      
-    } 
+      if (event.user.user_metadata.contract_id) {
+        api.idToken.setCustomClaim(`contract_id`, event.user.user_metadata.contract_id)
+      }
+
+      else {
+        
+        const contract_input = {
+          function: 'initializeContract', 
+          data: null
+          }
+          
+          api.idToken.setCustomClaim(`contract_input`, contract_input)
+
+          api.idToken.setCustomClaim(`email`, 0)
+          api.idToken.setCustomClaim(`email_verified`, 0)
+          api.idToken.setCustomClaim(`family_name`, 0)
+          api.idToken.setCustomClaim(`given_name`, 0)
+          api.idToken.setCustomClaim(`locale`, 0)
+          api.idToken.setCustomClaim(`name`, 'Othent User')
+          api.idToken.setCustomClaim(`nickname`, 0)
+          api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
+          }
+        } 
 
 
 
 
+    if (transaction_input.othentFunction === 'uploadData') {
 
-    if (transaction_input.othentFunction === 'initializeContract') {
+      const file_hash = transaction_input.file_hash
+      api.idToken.setCustomClaim(`file_hash`, file_hash)
 
-      const contract_input = {
-        function: transaction_input.warpData.function, 
-        data: transaction_input.warpData.data,
-        }
-      api.idToken.setCustomClaim(`contract_input`, contract_input)
+      api.idToken.setCustomClaim(`tags`, transaction_input.tags)
 
-      api.idToken.setCustomClaim(`email`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`email_verified`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`family_name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`given_name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`locale`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`nickname`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`picture`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`contract_id`, event.user.user_metadata.contract_id)
+
+      api.idToken.setCustomClaim(`email`, 0)
+      api.idToken.setCustomClaim(`email_verified`, 0)
+      api.idToken.setCustomClaim(`family_name`, 0)
+      api.idToken.setCustomClaim(`given_name`, 0)
+      api.idToken.setCustomClaim(`locale`, 0)
+      api.idToken.setCustomClaim(`name`, 'Othent User')
+      api.idToken.setCustomClaim(`nickname`, 0)
+      api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
     }
-
 
 
 
@@ -81,14 +97,16 @@ exports.onExecutePostLogin = async (event, api) => {
         }
       api.idToken.setCustomClaim(`contract_input`, contract_input)
 
-      api.idToken.setCustomClaim(`email`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`email_verified`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`family_name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`given_name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`locale`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`name`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`nickname`, 'redacted for privacy')
-      api.idToken.setCustomClaim(`picture`, 'redacted for privacy')
+      api.idToken.setCustomClaim(`contract_id`, event.user.user_metadata.contract_id)
+
+      api.idToken.setCustomClaim(`email`, 0)
+      api.idToken.setCustomClaim(`email_verified`, 0)
+      api.idToken.setCustomClaim(`family_name`, 0)
+      api.idToken.setCustomClaim(`given_name`, 0)
+      api.idToken.setCustomClaim(`locale`, 0)
+      api.idToken.setCustomClaim(`name`, 'Othent User')
+      api.idToken.setCustomClaim(`nickname`, 0)
+      api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
     }
 
 
