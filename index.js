@@ -22,17 +22,15 @@ exports.onExecutePostLogin = async (event, api) => {
         }
       api.idToken.setCustomClaim(`contract_input`, contract_input)
 
-      api.idToken.setCustomClaim(`tags`, transaction_input.tags)
-
       api.idToken.setCustomClaim(`contract_id`, event.user.user_metadata.contract_id)
 
-      api.idToken.setCustomClaim(`email`, 0)
-      api.idToken.setCustomClaim(`email_verified`, 0)
-      api.idToken.setCustomClaim(`family_name`, 0)
-      api.idToken.setCustomClaim(`given_name`, 0)
-      api.idToken.setCustomClaim(`locale`, 0)
+      api.idToken.setCustomClaim(`email`, '')
+      api.idToken.setCustomClaim(`email_verified`, '')
+      api.idToken.setCustomClaim(`family_name`, '')
+      api.idToken.setCustomClaim(`given_name`, '')
+      api.idToken.setCustomClaim(`locale`, '')
       api.idToken.setCustomClaim(`name`, 'Othent User')
-      api.idToken.setCustomClaim(`nickname`, 0)
+      api.idToken.setCustomClaim(`nickname`, '')
       api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
     } 
 
@@ -53,13 +51,13 @@ exports.onExecutePostLogin = async (event, api) => {
           
           api.idToken.setCustomClaim(`contract_input`, contract_input)
 
-          api.idToken.setCustomClaim(`email`, 0)
-          api.idToken.setCustomClaim(`email_verified`, 0)
-          api.idToken.setCustomClaim(`family_name`, 0)
-          api.idToken.setCustomClaim(`given_name`, 0)
-          api.idToken.setCustomClaim(`locale`, 0)
+          api.idToken.setCustomClaim(`email`, '')
+          api.idToken.setCustomClaim(`email_verified`, '')
+          api.idToken.setCustomClaim(`family_name`, '')
+          api.idToken.setCustomClaim(`given_name`, '')
+          api.idToken.setCustomClaim(`locale`, '')
           api.idToken.setCustomClaim(`name`, 'Othent User')
-          api.idToken.setCustomClaim(`nickname`, 0)
+          api.idToken.setCustomClaim(`nickname`, '')
           api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
           }
         } 
@@ -72,17 +70,15 @@ exports.onExecutePostLogin = async (event, api) => {
       const file_hash = transaction_input.file_hash
       api.idToken.setCustomClaim(`file_hash`, file_hash)
 
-      api.idToken.setCustomClaim(`tags`, transaction_input.tags)
-
       api.idToken.setCustomClaim(`contract_id`, event.user.user_metadata.contract_id)
 
-      api.idToken.setCustomClaim(`email`, 0)
-      api.idToken.setCustomClaim(`email_verified`, 0)
-      api.idToken.setCustomClaim(`family_name`, 0)
-      api.idToken.setCustomClaim(`given_name`, 0)
-      api.idToken.setCustomClaim(`locale`, 0)
+      api.idToken.setCustomClaim(`email`, '')
+      api.idToken.setCustomClaim(`email_verified`, '')
+      api.idToken.setCustomClaim(`family_name`, '')
+      api.idToken.setCustomClaim(`given_name`, '')
+      api.idToken.setCustomClaim(`locale`, '')
       api.idToken.setCustomClaim(`name`, 'Othent User')
-      api.idToken.setCustomClaim(`nickname`, 0)
+      api.idToken.setCustomClaim(`nickname`, '')
       api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
     }
 
@@ -99,14 +95,21 @@ exports.onExecutePostLogin = async (event, api) => {
 
       api.idToken.setCustomClaim(`contract_id`, event.user.user_metadata.contract_id)
 
-      api.idToken.setCustomClaim(`email`, 0)
-      api.idToken.setCustomClaim(`email_verified`, 0)
-      api.idToken.setCustomClaim(`family_name`, 0)
-      api.idToken.setCustomClaim(`given_name`, 0)
-      api.idToken.setCustomClaim(`locale`, 0)
+      api.idToken.setCustomClaim(`email`, '')
+      api.idToken.setCustomClaim(`email_verified`, '')
+      api.idToken.setCustomClaim(`family_name`, '')
+      api.idToken.setCustomClaim(`given_name`, '')
+      api.idToken.setCustomClaim(`locale`, '')
       api.idToken.setCustomClaim(`name`, 'Othent User')
-      api.idToken.setCustomClaim(`nickname`, 0)
+      api.idToken.setCustomClaim(`nickname`, '')
       api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
+    }
+
+
+    if (transaction_input.othentFunction === 'APIKeys') {
+
+      api.idToken.setCustomClaim(`API_ID`, event.user.user_metadata.API_ID)
+      api.idToken.setCustomClaim(`contract_id`, event.user.user_metadata.contract_id)
     }
 
 
