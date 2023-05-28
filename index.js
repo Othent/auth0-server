@@ -106,7 +106,7 @@ exports.onExecutePostLogin = async (event, api) => {
     }
 
 
-    if (transaction_input.othentFunction === 'APIKeys') {
+    if (transaction_input.othentFunction === 'API_ID') {
 
       api.idToken.setCustomClaim(`API_ID`, event.user.user_metadata.API_ID)
       api.idToken.setCustomClaim(`contract_id`, event.user.user_metadata.contract_id)

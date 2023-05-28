@@ -1,2 +1,2 @@
 # auth0-server
-Auth0 server for handling Oauth signing 
+Auth0 code, for handling Oauth signing 
