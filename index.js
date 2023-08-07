@@ -5,7 +5,9 @@
 * @param {PostLoginAPI} api - Interface whose methods can be used to change the behavior of the login.
 */
 exports.onExecutePostLogin = async (event, api) => {
-
+  // if (!event.user.email_verified) {
+  //   api.access.deny(`Please verify your email before logging in.`);
+  // }
 
   if (event.authorization) {
 
@@ -17,8 +19,8 @@ exports.onExecutePostLogin = async (event, api) => {
     if (transaction_input.othentFunction === 'sendTransaction') {
 
       const contract_input = {
-        function: transaction_input.warpData.function, 
-        data: transaction_input.warpData.data, 
+          function: transaction_input.warpData.function, 
+          data: transaction_input.warpData.data, 
         }
       api.idToken.setCustomClaim(`contract_input`, contract_input)
 
@@ -32,6 +34,13 @@ exports.onExecutePostLogin = async (event, api) => {
       api.idToken.setCustomClaim(`name`, 'Othent User')
       api.idToken.setCustomClaim(`nickname`, '')
       api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
+
+      if (transaction_input.testNet && event.user.user_metadata.test_net_contract_id) {
+          api.idToken.setCustomClaim(`test_net_contract_id`, event.user.user_metadata.test_net_contract_id)
+      } else if (transaction_input.testNet && !event.user.user_metadata.test_net_contract_id) {
+          throw new Error('Please log in through your testNet account.')
+      }
+
     } 
 
 
@@ -44,11 +53,10 @@ exports.onExecutePostLogin = async (event, api) => {
 
       else {
         
-        const contract_input = {
-          function: 'initializeContract', 
-          data: null
+          const contract_input = {
+            function: 'initializeContract', 
+            data: null
           }
-          
           api.idToken.setCustomClaim(`contract_input`, contract_input)
 
           api.idToken.setCustomClaim(`email`, '')
@@ -59,8 +67,18 @@ exports.onExecutePostLogin = async (event, api) => {
           api.idToken.setCustomClaim(`name`, 'Othent User')
           api.idToken.setCustomClaim(`nickname`, '')
           api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
-          }
-        } 
+        }
+
+        if (transaction_input.testNet && event.user.user_metadata.test_net_contract_id) {
+          api.idToken.setCustomClaim(`test_net_contract_id`, event.user.user_metadata.test_net_contract_id)
+        } else if (transaction_input.testNet && !event.user.user_metadata.test_net_contract_id) {
+            const contract_input = {
+              function: 'initializeContract', 
+              data: null
+            }
+            api.idToken.setCustomClaim(`contract_input`, contract_input)
+        }
+      } 
 
 
 
