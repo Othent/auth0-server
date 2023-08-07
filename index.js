@@ -69,7 +69,7 @@ exports.onExecutePostLogin = async (event, api) => {
           api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
         }
 
-        if (transaction_input.testNet && event.user.user_metadata.test_net_contract_id) {
+        if (event.user.user_metadata.test_net_contract_id) {
           api.idToken.setCustomClaim(`test_net_contract_id`, event.user.user_metadata.test_net_contract_id)
         } else if (transaction_input.testNet && !event.user.user_metadata.test_net_contract_id) {
             const contract_input = {
