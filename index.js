@@ -132,6 +132,25 @@ exports.onExecutePostLogin = async (event, api) => {
 
 
 
+    if (transaction_input.othentFunction === 'deployWarpContractFromTx') {
+
+      const srcTxId = transaction_input.srcTxId
+      api.idToken.setCustomClaim(`srcTxId`, srcTxId)
+
+      api.idToken.setCustomClaim(`contract_id`, event.user.user_metadata.contract_id)
+
+      api.idToken.setCustomClaim(`email`, '')
+      api.idToken.setCustomClaim(`email_verified`, '')
+      api.idToken.setCustomClaim(`family_name`, '')
+      api.idToken.setCustomClaim(`given_name`, '')
+      api.idToken.setCustomClaim(`locale`, '')
+      api.idToken.setCustomClaim(`name`, 'Othent User')
+      api.idToken.setCustomClaim(`nickname`, '')
+      api.idToken.setCustomClaim(`picture`, 'https://othent.io/user.png')
+    }
+
+
+
     
 
   }
